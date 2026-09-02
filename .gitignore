@@ -1,0 +1,23 @@
+# Внутрішні файли
+WORKFLOW.md
+notes/
+**/theory.md
+**/submit/
+
+# IDE
+.vs/
+.vscode/
+.devin/
+*.user
+*.suo
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Тимчасові файли
+*.tmp
+*.log
+*.bak
+notes/*
