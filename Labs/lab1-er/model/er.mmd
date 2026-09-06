@@ -1,0 +1,37 @@
+erDiagram
+    User {
+        uuid id PK
+        string email
+        string username
+        string password
+        string googleId
+        string avatar
+        string banner
+        string description
+        datetime createdAt
+    }
+
+    Video {
+        uuid id PK
+        string title
+        string description
+        string url
+        string thumbnail
+        int views
+        datetime createdAt
+        uuid authorId FK
+    }
+
+    Comment {
+        uuid id PK
+        string text
+        datetime createdAt
+        uuid userId FK
+        uuid videoId FK
+    }
+
+    User ||--o{ Video : "authors"
+    User ||--o{ Comment : "writes"
+    Video ||--o{ Comment : "has"
+    User }|--|{ Video : "likes"
+    User }|--|{ User : "subscribes to"
