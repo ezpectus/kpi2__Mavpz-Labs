@@ -1,4 +1,4 @@
-# Spec: Lab 1 - ER-модель VideoHub (draft)
+# Spec: Lab 1 - ER-модель VideoHub
 
 ## Намір
 
@@ -55,4 +55,13 @@
 4. User - Video: many-to-many через Like (асоціативна сутність)
 5. User - User: many-to-many через Subscription (self-referencing, асоціативна сутність)
 
-TODO: дописати критерії прийняття
+## Критерії прийняття
+
+- [x] Кардинальності коректні (1:N, M:N)
+- [ ] M:N зв'язки мають асоціативні сутності (Like, Subscription)
+- [x] Первинні ключі визначені для всіх сутностей
+- [x] Зовнішні ключі визначені
+- [ ] Модель нормалізована (3NF - немає транзитивних залежностей)
+- [ ] ER-рендер збігається з описом у spec
+- [ ] Unique-обмеження на (userId, videoId) для Like і (subscriberId, channelId) для Subscription
+- [ ] Unique на email, username, googleId в User
