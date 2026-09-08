@@ -30,8 +30,15 @@ erDiagram
         uuid videoId FK
     }
 
+    Like {
+        uuid id PK
+        uuid userId FK
+        uuid videoId FK
+    }
+
     User ||--o{ Video : "authors"
     User ||--o{ Comment : "writes"
     Video ||--o{ Comment : "has"
-    User }|--|{ Video : "likes"
+    User ||--o{ Like : "places"
+    Video ||--o{ Like : "receives"
     User }|--|{ User : "subscribes to"
