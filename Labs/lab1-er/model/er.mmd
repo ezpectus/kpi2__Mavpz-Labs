@@ -36,9 +36,22 @@ erDiagram
         uuid videoId FK
     }
 
+    Subscription {
+        uuid id PK
+        uuid subscriberId FK
+        uuid channelId FK
+        datetime createdAt
+    }
+
     User ||--o{ Video : "authors"
     User ||--o{ Comment : "writes"
     Video ||--o{ Comment : "has"
     User ||--o{ Like : "places"
     Video ||--o{ Like : "receives"
-    User }|--|{ User : "subscribes to"
+    User ||--o{ Subscription : "subscriber"
+    User ||--o{ Subscription : "channel"
+
+    %% Unique constraints:
+    %% User: email, username, googleId
+    %% Like: (userId, videoId)
+    %% Subscription: (subscriberId, channelId)
