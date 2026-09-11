@@ -1,0 +1,24 @@
+---
+title: VideoHub Use Cases v1
+---
+graph LR
+    Guest((Guest))
+    User((User))
+
+    UC1[Register]
+    UC2[Login]
+    UC3[Upload Video]
+    UC4[Watch Video]
+    UC5[Comment]
+    UC6[Like Video]
+    UC7[Subscribe]
+    UC8[Search Videos]
+
+    Guest --> UC4
+    Guest --> UC8
+    User --> UC1
+    User --> UC2
+    User --> UC3
+    User --> UC5
+    User --> UC6
+    User --> UC7
