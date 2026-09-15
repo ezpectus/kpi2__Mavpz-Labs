@@ -1,9 +1,12 @@
 ---
-title: VideoHub Use Cases v1
+title: VideoHub Use Cases v2
 ---
 graph LR
     Guest((Guest))
     User((User))
+    Google[Google OAuth]
+
+    Guest -.->|generalization| User
 
     UC1[Register]
     UC2[Login]
@@ -22,3 +25,4 @@ graph LR
     User --> UC5
     User --> UC6
     User --> UC7
+    Google --> UC2
