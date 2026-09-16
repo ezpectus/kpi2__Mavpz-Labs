@@ -58,10 +58,10 @@
 ## Критерії прийняття
 
 - [x] Кардинальності коректні (1:N, M:N)
-- [ ] M:N зв'язки мають асоціативні сутності (Like, Subscription)
+- [x] M:N зв'язки мають асоціативні сутності (Like, Subscription)
 - [x] Первинні ключі визначені для всіх сутностей
 - [x] Зовнішні ключі визначені
-- [ ] Модель нормалізована (3NF - немає транзитивних залежностей)
-- [ ] ER-рендер збігається з описом у spec
-- [ ] Unique-обмеження на (userId, videoId) для Like і (subscriberId, channelId) для Subscription
-- [ ] Unique на email, username, googleId в User
+- [x] Модель нормалізована (3NF - немає транзитивних залежностей)
+- [x] ER-рендер збігається з описом у spec
+- [x] Unique-обмеження на (userId, videoId) для Like і (subscriberId, channelId) для Subscription
+- [x] Unique на email, username, googleId в User
