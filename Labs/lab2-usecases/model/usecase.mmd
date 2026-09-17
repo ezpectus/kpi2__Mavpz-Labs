@@ -1,5 +1,5 @@
 ---
-title: VideoHub Use Cases v2
+title: VideoHub Use Cases v3
 ---
 graph LR
     Guest((Guest))
@@ -16,6 +16,7 @@ graph LR
     UC6[Like Video]
     UC7[Subscribe]
     UC8[Search Videos]
+    UC9[Authenticate]
 
     Guest --> UC4
     Guest --> UC8
@@ -25,4 +26,11 @@ graph LR
     User --> UC5
     User --> UC6
     User --> UC7
-    Google --> UC2
+    Google --> UC9
+
+    UC2 -.->|include| UC9
+    UC3 -.->|include| UC9
+    UC5 -.->|include| UC9
+    UC6 -.->|include| UC9
+    UC7 -.->|include| UC9
+    UC8 -.->|extend| UC4
