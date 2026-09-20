@@ -126,4 +126,4 @@ Scenario: Guest searches for videos
 | REQ10 | - | - | - |
 | REQ11 | - | - | - (непокрита, див. пояснення вище) |
 
-Покриття: REQ10 (subscriber list) - не має окремого UC, це частина UC7 (Subscribe) з точки зору channel owner. Можна додати UC9 якщо треба.
+Покриття: REQ10 (subscriber list) - не має окремого UC, це частина UC7 (Subscribe) з точки зору channel owner. Можна додати UC10 (View Subscribers) якщо треба.

@@ -1,17 +1,19 @@
-# DEFENSE - Lab 1: ER-модель VideoHub
+# DEFENSE: Lab 1 - ER-модель VideoHub
 
-## Чому Mermaid а не PlantUML
+## 1. Намір і критерії
 
-Вибрав Mermaid erDiagram бо рендериться в GitHub нативно. Препод відкриває репо і бачить діаграму без інструментів. PlantUML потужніший (підтримка inheritance, notations) але треба Java або плагін. Для лаби достатньо. Деталі: adr/adr-001-notation-choice.md
+Змоделював дані відеоплатформи VideoHub як ER-модель: 5 сутностей, зв'язки 1:N і M:N, первинні/зовнішні ключі, unique-обмеження. Критерії прийняття зафіксовані в spec.md - коректні кардинальності, M:N тільки через асоціативні сутності, 3NF, рендер відповідає spec.
 
-## Узгодженість з проєктом
+## 2. Топ-3 розбіжності (знайшов і виправив)
 
-Це перша лаба - попередніх моделей немає. Порівняв з реальним проєктом VideoHub (Prisma schema): 5 сутностей (User, Video, Comment, Like, Subscription), 5 зв'язків, FK і unique-обмеження співпадають з schema.prisma один в один.
+1. **Like як прямий M:N** - `User }|--|{ Video` без асоціативної сутності, проти критерію spec "M:N через Like (асоціативна сутність)". Розгорнув через Like: `User ||--o{ Like`, `Video ||--o{ Like`. -> commit `6a26223` (lab1: fix - like as associative entity)
+2. **Subscription як прямий M:N self-ref** - та сама помилка: `User }|--|{ User` напряму, проти критерію "M:N через Subscription". Розгорнув через Subscription з двома FK на User (subscriberId, channelId). -> commit `c319a9d` (lab1: fix - subscription as associative entity + unique note)
+3. **Unique-обмеження не показані** - проти критеріїв spec про unique на (userId, videoId), (subscriberId, channelId) і email/username/googleId. Mermaid erDiagram не має unique-нотації - додав ноту на діаграму і уточнив у spec. -> commit `c319a9d`
 
-## Що знайшов в аудиті і виправив
+## 3. Ключове рішення
 
-1. Like був прямим M:N (`User }|--|{ Video`) замість асоціативної сутності. Розгорнув через Like (User ||--o{ Like, Video ||--o{ Like). Commit: `fix - like as associative entity`
+Mermaid erDiagram замість PlantUML і dbdiagram.io. PlantUML потужніший (unique-нотація, більше деталей) але треба Java, рендер не в GitHub. dbdiagram.io - не текстовий артефакт, не покладеш в репо. Mermaid рендериться прямо в репо - препод відкриває файл і бачить діаграму. Деталі: adr/adr-001-notation-choice.md
 
-2. Subscription так само - прямий M:N self-ref. Розгорнув через Subscription з двома FK на User. Commit: `fix - subscription as associative entity`
+## 4. Перевірка узгодженості з попередньою моделлю
 
-3. Unique-обмеження не були показані. Mermaid erDiagram не підтримує unique нотацію, додав коментар на діаграму. Commit: `fix - add unique constraints note`
+Перша лаба - попередніх моделей у ланцюгу немає. Як референс порівняв з Prisma schema реального проєкту VideoHub: 5 моделей = 5 сутностей, всі атрибути, FK і @@unique співпадають один в один. Деталі порівняння в AUDIT.md.
