@@ -13,7 +13,7 @@
 В Prisma: Like - окрема модель з FK на User і Video + @@unique([userId, videoId]).
 
 Виправив: розгорнув M:N через Like як асоціативну сутність (User ||--o{ Like, Video ||--o{ Like).
-Commit: `fix - like as associative entity not direct M:N`
+Commit: `lab1: fix - like as associative entity not direct M:N`
 
 ### 2. Subscription - прямий M:N замість асоціативної сутності
 
@@ -22,7 +22,7 @@ Commit: `fix - like as associative entity not direct M:N`
 В Prisma: Subscription - окрема модель з двома FK на User + @@unique([subscriberId, channelId]).
 
 Виправив: розгорнув M:N через Subscription (User ||--o{ Subscription "subscriber", User ||--o{ Subscription "channel").
-Commit: `fix - subscription as associative entity, self-ref M:N`
+Commit: `lab1: fix - subscription as associative entity + unique note`
 
 ### 3. Unique-обмеження не показані на діаграмі
 
@@ -30,4 +30,4 @@ Commit: `fix - subscription as associative entity, self-ref M:N`
 Mermaid erDiagram не підтримує unique-нотацію на діаграмі.
 
 Виправив: додав comment-блок з unique-обмеженнями на діаграму.
-Commit: `add unique constraints note to diagram`
+Commit: `lab1: fix - subscription as associative entity + unique note` (той самий - unique туди ж)
