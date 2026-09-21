@@ -40,6 +40,7 @@ KPI2-MAVPZ Labs/
 - `README.md` - опис домену
 - `spec.md` - намір, сутності/кроки, критерії прийняття (<=1 стор.)
 - `model/` - артефакт моделі (Mermaid .mmd)
+- `renders/` - рендер діаграми (PNG)
 - `AUDIT.md` - топ-3 розбіжності з деталями
 - `adr/` - Architecture Decision Records (MADR)
 - `DEFENSE.md` - точка входу для рев'ю (1 стор.)
