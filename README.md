@@ -8,6 +8,8 @@
 
 Рік: 2026, осінній семестр
 
+Домен усіх завдань: **VideoHub** - платформа для відео, реальний проєкт: [github.com/ezpectus/VideoHub](https://github.com/ezpectus/VideoHub)
+
 ---
 
 ## Завдання
