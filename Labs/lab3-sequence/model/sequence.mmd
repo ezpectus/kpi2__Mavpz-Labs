@@ -1,0 +1,11 @@
+---
+title: VideoHub Upload Video - Sequence
+---
+sequenceDiagram
+    actor User
+    participant Server
+    participant Database
+
+    User->>Server: upload video (title, description, url, token)
+    Server->>Database: save video
+    Server->>User: ok
