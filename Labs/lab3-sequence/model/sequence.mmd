@@ -3,9 +3,16 @@ title: VideoHub Upload Video - Sequence
 ---
 sequenceDiagram
     actor User
-    participant Server
+    participant VideoController
+    participant AuthService
+    participant VideoService
     participant Database
 
-    User->>Server: upload video (title, description, url, token)
-    Server->>Database: save video
-    Server->>User: ok
+    User->>VideoController: POST /api/videos (title, description, url, token)
+    VideoController->>AuthService: validateToken(token)
+    AuthService-->>VideoController: userId
+    VideoController->>VideoService: uploadVideo(userId, title, description, url)
+    VideoService->>Database: createVideo(userId, title, description, url)
+    Database-->>VideoService: videoId
+    VideoService-->>VideoController: videoId
+    VideoController-->>User: 201 Created (videoId)
