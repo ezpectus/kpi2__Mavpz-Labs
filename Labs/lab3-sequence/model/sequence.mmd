@@ -9,29 +9,28 @@ sequenceDiagram
     participant Database
 
     User->>VideoController: POST /api/videos (title, description, url, token)
+    VideoController->>AuthService: validateToken(token)
 
     alt token invalid
-        VideoController->>AuthService: validateToken(token)
         AuthService-->>VideoController: null
         VideoController-->>User: 401 Unauthorized
     else token valid
-        VideoController->>AuthService: validateToken(token)
         AuthService-->>VideoController: userId
 
-        opt title is empty
+        alt title is empty
             VideoController-->>User: 400 Bad Request
+        else title ok
+            VideoController->>VideoService: uploadVideo(userId, title, description, url)
+            VideoService->>Database: createVideo(authorId = userId, title, description, url)
+
+            alt url already uploaded by this author
+                Database-->>VideoService: conflict
+                VideoService-->>VideoController: conflict
+                VideoController-->>User: 409 Conflict
+            else video created
+                Database-->>VideoService: videoId
+                VideoService-->>VideoController: videoId
+                VideoController-->>User: 201 Created (videoId)
+            end
         end
-
-        VideoController->>VideoService: uploadVideo(userId, title, description, url)
-        VideoService->>Database: createVideo(userId, title, description, url)
-
-        opt url already exists
-            Database-->>VideoService: conflict
-            VideoService-->>VideoController: 409 Conflict
-            VideoController-->>User: 409 Conflict
-        end
-
-        Database-->>VideoService: videoId
-        VideoService-->>VideoController: videoId
-        VideoController-->>User: 201 Created (videoId)
     end
