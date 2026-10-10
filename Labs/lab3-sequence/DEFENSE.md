@@ -1,23 +1,27 @@
 # DEFENSE: Lab 3 - Sequence Diagram
 
-## 1. Намір і критерії
+## 1. Намір і критерії (1-2 речення)
 
-Описати динаміку UC3 (Upload Video) з Завдання 2 як sequence-діаграму. Актор + 4 компоненти (VideoController, AuthService, VideoService, Database), alt/else гілки помилок (401, 400, 409), return-повідомлення, реалістичні назви викликів. Критерії зафіксовані в spec.md комітом `faabc11`.
+Описати динаміку UC3 (Upload Video) з Завдання 2 як sequence-діаграму: актор + компоненти/об'єкти, повідомлення з напрямком, return-повідомлення, alt/else гілки помилок (401, 400, 409), реалістичні назви викликів. Критерії зафіксовані в spec.md комітом `faabc11`.
 
-## 2. Топ-3 розбіжності -> коміти
+## 2. Топ-3 розбіжності (spec <-> артефакт) + коміт-виправлення
 
-- Один учасник "Server" + немає return-повідомлень — проти spec "основні компоненти/об'єкти" і "return-повідомлення". Розбив на VideoController/AuthService/VideoService/Database, додав -->> для всіх викликів. Коміт: `5395f87`
-- Немає гілок помилок (тільки happy path) — проти spec "альтернативні/умовні гілки" і "401, 400, 409". Додав alt-гілки. Коміт: `2efea96`
-- opt для термінальних помилок (потік продовжувався до 201 після 400/409) + userId замість authorId у createVideo — проти spec "гілки помилок завершують сценарій" і ER-назви. Замінив на вкладені alt/else, єдиний validateToken, `authorId = userId`. Коміт: `9c345cb`
+- Один учасник "Server" + немає return-повідомлень — проти spec "основні компоненти/об'єкти" і "return-повідомлення". Розбив на VideoController/AuthService/VideoService/Database, додав -->> для всіх викликів. Коміт-виправлення: `5395f87`
+- Немає гілок помилок (тільки happy path) — проти spec "альтернативні/умовні гілки" і "401, 400, 409". Додав alt-гілки. Коміт-виправлення: `2efea96`
+- opt для термінальних помилок (потік продовжувався до 201 після 400/409) + userId замість authorId у createVideo — проти spec "гілки помилок завершують сценарій" і ER-назви. Замінив на вкладені alt/else, єдиний validateToken, `authorId = userId`. Коміт-виправлення: `9c345cb`
 
-## 3. Ключове рішення (ADR)
+## 3. Ключове рішення - які альтернативи зважив і чому обрав цю (ADR)
 
-Mermaid sequenceDiagram замість PlantUML. На відміну від use case діаграми (Lab 2) де Mermaid — компроміс, для sequence вона повністю підтримує UML-нотацію: actor, participant, ->>, -->>, alt/else, opt, loop. Рендериться нативно в GitHub; PlantUML — ні. Деталі: `adr/adr-003-sequence-notation.md`
+Як обробляти дубльований url при upload: UNIQUE-обмеження в моделі даних, бізнес-правило на рівні застосунку чи взагалі без дедуплікації. Обрав правило застосунку, зафіксоване в spec.md: ER-модель Lab 1 не змінюється заднім числом, правило лишається гнучким, а гілка 409 у діаграмі має реальну доменну причину. Деталі: `adr/adr-003-upload-dedup-rule.md`
 
-## 4. Перевірка — узгодженість із попередніми моделями
+Окремо щодо формату: Mermaid sequenceDiagram замість PlantUML — для sequence вона повністю підтримує потрібну UML-нотацію (actor, ->>, -->>, alt/else, opt, loop) і рендериться нативно в GitHub.
 
-**З Lab 1 (ER):** Database створює Video entity — атрибути виклику createVideo збігаються з полями Video (title, description, url, authorId). authorId = userId з AuthService — показано як `authorId = userId`.
+## 4. Перевірка - узгодженість із попередньою моделлю (як перевірив)
 
-**З Lab 2 (UC):** UC3 деталізований крок-в-крок; include UC9 (Authenticate) реалізований як AuthService.validateToken(). Помилкові гілки відповідають alternative flows UC3.
+**З Lab 1 (ER):** Database створює Video entity — атрибути виклику createVideo збігаються з полями Video (title, description, url, authorId). authorId = userId з AuthService — показано явно як `authorId = userId`. Поле `url` в ER не має UNIQUE — тому дедуп винесено в бізнес-правило (див. ADR-003).
 
-Додатково: для 409 в spec зафіксовано бізнес-правило дедуплікації (authorId, url) — в ER унікального обмеження на Video.url немає, тому це правило рівня застосунку, а не БД-констрейнт.
+**З Lab 2 (UC):** UC3 деталізований крок-в-крок згідно зі spec UC-діаграми; include UC9 (Authenticate) реалізований як AuthService.validateToken(). Помилкові гілки 401/400/409 відповідають alternative flows UC3.
+
+## 5. Здача
+
+Посилання на GitHub PR: (див. submit/defense.txt) + цей заповнений DEFENSE.

@@ -45,4 +45,4 @@ VideoHub - платформа для завантаження та перегл�
 - `renders/sequence.png` - рендер
 - `AUDIT.md` - топ-3 розбіжності + коміти-виправлення
 - `DEFENSE.md` - точка входу для рев'ю
-- `adr/adr-003-sequence-notation.md` - чому Mermaid
+- `adr/adr-003-upload-dedup-rule.md` - дедуп (authorId, url) як бізнес-правило
