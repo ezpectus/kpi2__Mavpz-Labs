@@ -26,8 +26,8 @@
 |----|-------|
 | US1 | As a Guest, I want to search videos by title so that I can find content without registering |
 | US2 | As a Guest, I want to watch videos so that I can view content |
-| US3 | As a User, I want to register with email so that I can have an account |
-| US4 | As a User, I want to login with Google so that I don't need to remember another password |
+| US3 | As a Guest, I want to register with email so that I can become a User |
+| US4 | As a Guest, I want to login with Google so that I can access my account |
 | US5 | As a User, I want to upload videos so that I can share my content |
 | US6 | As a User, I want to comment on videos so that I can discuss content |
 | US7 | As a User, I want to like videos so that I can show appreciation |
