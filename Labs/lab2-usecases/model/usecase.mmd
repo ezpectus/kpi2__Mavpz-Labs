@@ -6,7 +6,7 @@ graph LR
     User((User))
     Google[Google OAuth]
 
-    Guest -.->|generalization| User
+    User -.->|generalization| Guest
 
     UC1[Register]
     UC2[Login]
@@ -18,10 +18,10 @@ graph LR
     UC8[Search Videos]
     UC9[Authenticate]
 
+    Guest --> UC1
+    Guest --> UC2
     Guest --> UC4
     Guest --> UC8
-    User --> UC1
-    User --> UC2
     User --> UC3
     User --> UC5
     User --> UC6

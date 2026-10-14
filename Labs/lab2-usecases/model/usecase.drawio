@@ -62,10 +62,10 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <mxCell id="u_uc1" style="html=1;endArrow=none;exitX=1;exitY=0.2;exitDx=0;exitDy=0;entryX=0;entryY=0.9;entryDx=0;entryDy=0;" edge="1" parent="1" source="User" target="UC1">
+        <mxCell id="u_uc1" style="html=1;endArrow=none;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.6;entryDx=0;entryDy=0;" edge="1" parent="1" source="Guest" target="UC1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="u_uc2" style="html=1;endArrow=none;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.9;entryDx=0;entryDy=0;" edge="1" parent="1" source="User" target="UC2">
+        <mxCell id="u_uc2" style="html=1;endArrow=none;exitX=1;exitY=0.65;exitDx=0;exitDy=0;entryX=0;entryY=0.4;entryDx=0;entryDy=0;" edge="1" parent="1" source="Guest" target="UC2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="u_uc3" style="html=1;endArrow=none;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.7;entryDx=0;entryDy=0;" edge="1" parent="1" source="User" target="UC3">
