@@ -28,9 +28,9 @@ UC3: Upload Video (з Lab 2)
 3. alt: токен невалідний -> AuthService повертає null, контролер відповідає 401
 4. alt: токен валідний -> повертає userId (дійде до Video.authorId з ER)
 5. alt: title порожній -> 400 Bad Request (валідація контролера, до сервісу не доходить)
-6. uploadVideo -> createVideo(authorId = userId, title, description, url)
+6. uploadVideo -> findByAuthorAndUrl(authorId = userId, url) — явний крок перевірки бізнес-правила дедупу (ADR-003: правило рівня застосунку — перевіряє сервіс, а не UNIQUE-обмеження БД)
 7. alt: (authorId, url) вже існує -> Database повертає conflict, користувачу 409
-8. else: Database повертає videoId -> VideoController відповідає 201 Created (videoId)
+8. else: не знайдено -> createVideo(authorId = userId, ...) -> Database повертає videoId -> VideoController відповідає 201 Created (videoId)
 
 ## Бізнес-правило для 409
 
@@ -41,6 +41,8 @@ UC3: Upload Video (з Lab 2)
 - [x] Діаграма деталізує UC3 з Lab 2 (учасники, кроки, include UC9)
 - [x] Учасники узгоджені з ER-моделлю (Video entity, authorId = userId)
 - [x] Реалістичні назви викликів (validateToken, uploadVideo, createVideo)
-- [x] Альтернативні гілки (alt/else); гілки помилок завершують сценарій, а не продовжують його
+- [x] Альтернативні гілки (alt/else); гілки помилок ТЕРМІНАЛЬНІ (alt, не opt — opt не обриває сценарій)
+- [x] Кроки бізнес-правил — явні повідомлення: дедуп-перевірка findByAuthorAndUrl перед createVideo, а не неявний конфлікт БД
 - [x] Return-повідомлення для викликів
 - [x] Гілки помилок: 401, 400, 409 + успіх 201
+- [x] Компоненти — окремі lifelines (не один "Server"); validateToken один виклик перед розгалуженням

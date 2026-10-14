@@ -1,23 +1,23 @@
 <mxfile host="app.diagrams.net" agent="drawio" version="24.0.0">
   <diagram name="Lab3-Sequence" id="lab3seq">
-    <mxGraphModel dx="900" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="830" pageHeight="900" math="0" shadow="0">
+    <mxGraphModel dx="900" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="830" pageHeight="950" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="lifUser" value="User" style="shape=umlLifeline;perimeter=lifelinePerimeter;participant=umlActor;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;fontSize=12;" parent="1" vertex="1">
-          <mxGeometry x="60" y="40" width="40" height="640" as="geometry" />
+          <mxGeometry x="60" y="40" width="40" height="700" as="geometry" />
         </mxCell>
         <mxCell id="lifVC" value="VideoController" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;fontSize=12;" parent="1" vertex="1">
-          <mxGeometry x="210" y="40" width="100" height="640" as="geometry" />
+          <mxGeometry x="210" y="40" width="100" height="700" as="geometry" />
         </mxCell>
         <mxCell id="lifAuth" value="AuthService" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;fontSize=12;" parent="1" vertex="1">
-          <mxGeometry x="350" y="40" width="100" height="640" as="geometry" />
+          <mxGeometry x="350" y="40" width="100" height="700" as="geometry" />
         </mxCell>
         <mxCell id="lifVS" value="VideoService" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;fontSize=12;" parent="1" vertex="1">
-          <mxGeometry x="490" y="40" width="100" height="640" as="geometry" />
+          <mxGeometry x="490" y="40" width="100" height="700" as="geometry" />
         </mxCell>
         <mxCell id="lifDB" value="Database" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;fontSize=12;" parent="1" vertex="1">
-          <mxGeometry x="630" y="40" width="100" height="640" as="geometry" />
+          <mxGeometry x="630" y="40" width="100" height="700" as="geometry" />
         </mxCell>
         <mxCell id="m1" value="POST /api/videos (title, description, url, token)" style="html=1;endArrow=block;endFill=1;fontSize=11;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -32,7 +32,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="frAlt1" value="alt" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;fontSize=11;verticalAlign=top;" parent="1" vertex="1">
-          <mxGeometry x="90" y="172" width="615" height="468" as="geometry" />
+          <mxGeometry x="90" y="172" width="615" height="505" as="geometry" />
         </mxCell>
         <mxCell id="cond1" value="[token invalid]" style="text;html=1;fontSize=10;fontStyle=2;" parent="1" vertex="1">
           <mxGeometry x="140" y="178" width="90" height="16" as="geometry" />
@@ -65,7 +65,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="frAlt2" value="alt" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;fontSize=11;verticalAlign=top;" parent="1" vertex="1">
-          <mxGeometry x="270" y="300" width="430" height="330" as="geometry" />
+          <mxGeometry x="270" y="300" width="430" height="370" as="geometry" />
         </mxCell>
         <mxCell id="cond2" value="[title is empty]" style="text;html=1;fontSize=10;fontStyle=2;" parent="1" vertex="1">
           <mxGeometry x="320" y="306" width="95" height="16" as="geometry" />
@@ -91,14 +91,14 @@
             <mxPoint x="535" y="378" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="m8" value="createVideo(authorId = userId, title, description, url)" style="html=1;endArrow=block;endFill=1;fontSize=11;" parent="1" edge="1">
+        <mxCell id="m8" value="findByAuthorAndUrl(authorId = userId, url)" style="html=1;endArrow=block;endFill=1;fontSize=11;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="545" y="408" as="sourcePoint" />
             <mxPoint x="675" y="408" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="frAlt3" value="alt" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;fontSize=11;verticalAlign=top;" parent="1" vertex="1">
-          <mxGeometry x="555" y="435" width="145" height="185" as="geometry" />
+          <mxGeometry x="555" y="435" width="145" height="230" as="geometry" />
         </mxCell>
         <mxCell id="cond3" value="[url already uploaded by this author]" style="text;html=1;fontSize=9;fontStyle=2;" parent="1" vertex="1">
           <mxGeometry x="595" y="438" width="105" height="24" as="geometry" />
@@ -127,25 +127,37 @@
             <mxPoint x="697" y="534" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="else3" value="else [video created]" style="text;html=1;fontSize=9;fontStyle=2;" parent="1" vertex="1">
+        <mxCell id="else3" value="else [no duplicate found]" style="text;html=1;fontSize=9;fontStyle=2;" parent="1" vertex="1">
           <mxGeometry x="560" y="518" width="100" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="m12a" value="not found" style="html=1;endArrow=open;endFill=0;dashed=1;fontSize=11;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="675" y="548" as="sourcePoint" />
+            <mxPoint x="550" y="548" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m12b" value="createVideo(authorId = userId, title, description, url)" style="html=1;endArrow=block;endFill=1;fontSize=11;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="545" y="572" as="sourcePoint" />
+            <mxPoint x="675" y="572" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="m12" value="videoId" style="html=1;endArrow=open;endFill=0;dashed=1;fontSize=11;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="675" y="560" as="sourcePoint" />
-            <mxPoint x="550" y="560" as="targetPoint" />
+            <mxPoint x="675" y="595" as="sourcePoint" />
+            <mxPoint x="550" y="595" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="m13" value="videoId" style="html=1;endArrow=open;endFill=0;dashed=1;fontSize=11;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="535" y="585" as="sourcePoint" />
-            <mxPoint x="270" y="585" as="targetPoint" />
+            <mxPoint x="535" y="618" as="sourcePoint" />
+            <mxPoint x="270" y="618" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="m14" value="201 Created (videoId)" style="html=1;endArrow=open;endFill=0;dashed=1;fontSize=11;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="255" y="610" as="sourcePoint" />
-            <mxPoint x="95" y="610" as="targetPoint" />
+            <mxPoint x="255" y="640" as="sourcePoint" />
+            <mxPoint x="95" y="640" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>

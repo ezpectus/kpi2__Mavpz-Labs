@@ -21,13 +21,15 @@ sequenceDiagram
             VideoController-->>User: 400 Bad Request
         else title ok
             VideoController->>VideoService: uploadVideo(userId, title, description, url)
-            VideoService->>Database: createVideo(authorId = userId, title, description, url)
+            VideoService->>Database: findByAuthorAndUrl(authorId = userId, url)
 
             alt url already uploaded by this author
                 Database-->>VideoService: conflict
                 VideoService-->>VideoController: conflict
                 VideoController-->>User: 409 Conflict
-            else video created
+            else no duplicate found
+                Database-->>VideoService: not found
+                VideoService->>Database: createVideo(authorId = userId, title, description, url)
                 Database-->>VideoService: videoId
                 VideoService-->>VideoController: videoId
                 VideoController-->>User: 201 Created (videoId)
