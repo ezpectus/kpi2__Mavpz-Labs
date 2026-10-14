@@ -43,6 +43,7 @@ VideoHub - платформа для завантаження та перегл�
 - `model/sequence.mmd` - Mermaid sequenceDiagram (source)
 - `model/sequence.drawio` - та сама діаграма для редагування в diagrams.net
 - `renders/sequence.png` - рендер
-- `AUDIT.md` - топ-3 розбіжності + коміти-виправлення
+- `AUDIT.md` - розбіжності spec <-> артефакт + коміти-виправлення (4 findings)
 - `DEFENSE.md` - точка входу для рев'ю
 - `adr/adr-003-upload-dedup-rule.md` - дедуп (authorId, url) як бізнес-правило
+- `ai/` - слід AI-ітерації: prompts.md (промпти) + audit.md (знахідки й виправлення)
