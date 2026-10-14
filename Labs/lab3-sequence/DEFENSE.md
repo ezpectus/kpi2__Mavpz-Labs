@@ -6,9 +6,11 @@
 
 ## 2. Топ-3 розбіжності (spec <-> артефакт) + коміт-виправлення
 
-- Один учасник "Server" + немає return-повідомлень — проти spec "основні компоненти/об'єкти" і "return-повідомлення". Розбив на VideoController/AuthService/VideoService/Database, додав -->> для всіх викликів. Коміт-виправлення: `5395f87`
-- Немає гілок помилок (тільки happy path) — проти spec "альтернативні/умовні гілки" і "401, 400, 409". Додав alt-гілки. Коміт-виправлення: `2efea96`
-- opt для термінальних помилок (потік продовжувався до 201 після 400/409) + userId замість authorId у createVideo — проти spec "гілки помилок завершують сценарій" і ER-назви. Замінив на вкладені alt/else, єдиний validateToken, `authorId = userId`. Коміт-виправлення: `9c345cb`
+- Один учасник "Server" + немає return-повідомлень — проти spec "основні компоненти/об'єкти" і "return-повідомлення". Розбив на VideoController/AuthService/VideoService/Database, додав -->> для всіх викликів. Коміт-модель: `5395f87`; критерій у spec уточнено комітом `eec9c72`
+- opt для термінальних помилок (потік продовжувався до 201 після 400/409) + userId замість authorId у createVideo — проти spec "гілки помилок завершують сценарій" і ER-назви. Замінив на вкладені alt/else, єдиний validateToken, `authorId = userId`. Коміт-модель: `9c345cb`; критерій уточнено до "ТЕРМІНАЛЬНІ (alt, не opt)" комітом `eec9c72`
+- Дедуп як неявний конфлікт БД — Database відповідав conflict на createVideo, що виглядало як UNIQUE-обмеження, а ADR-003 каже: правило рівня застосунку. Критерію в spec не було — додано "кроки бізнес-правил — явні повідомлення". Коміт spec+модель: `eec9c72` (findByAuthorAndUrl перед createVideo)
+
+Повний список — AUDIT.md (4 розбіжності, вкл. відсутні гілки помилок -> `2efea96`).
 
 ## 3. Ключове рішення - які альтернативи зважив і чому обрав цю (ADR)
 
@@ -18,7 +20,7 @@
 
 ## 4. Перевірка - узгодженість із попередньою моделлю (як перевірив)
 
-**З Lab 1 (ER):** Database створює Video entity — атрибути виклику createVideo збігаються з полями Video (title, description, url, authorId). authorId = userId з AuthService — показано явно як `authorId = userId`. Поле `url` в ER не має UNIQUE — тому дедуп винесено в бізнес-правило (див. ADR-003).
+**З Lab 1 (ER):** Database створює Video entity — атрибути виклику createVideo збігаються з полями Video (title, description, url, authorId). authorId = userId з AuthService — показано явно як `authorId = userId`. Поле `url` в ER не має UNIQUE — тому дедуп винесено в бізнес-правило (ADR-003) і подано явним кроком findByAuthorAndUrl перед createVideo, а не конфліктом БД.
 
 **З Lab 2 (UC):** UC3 деталізований крок-в-крок згідно зі spec UC-діаграми; include UC9 (Authenticate) реалізований як AuthService.validateToken(). Помилкові гілки 401/400/409 відповідають alternative flows UC3.
 
