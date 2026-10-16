@@ -33,3 +33,17 @@
 **Знайдено:** (a) у `usecase.mmd` стояло `Guest -.->|generalization| User` — читається «Guest є різновидом User», а в `usecase.drawio` стрілка йшла правильно User -> Guest: два артефакти однієї моделі суперечили. (b) UC1 Register і UC2 Login були асоційовані з User — а реєструється саме Guest (зареєстрований User не може реєструватись). User stories US3/US4 казали «As a User» про реєстрацію — та сама розбіжність у requirements.md.
 **Виправив:** `User -.->|generalization| Guest` у .mmd; UC1/UC2 переприв'язані до Guest; US3/US4 -> «As a Guest»; PNG перерендерено; drawio синхронно.
 **Коміт spec+модель:** `fdba085` — lab2: spec+model - guest owns register/login + generalization direction fix (один коміт змінює spec.md, usecase.mmd, usecase.drawio, requirements.md, renders/usecase.png)
+
+### 5. Діаграма не в UML-нотації (знайдено при рев'ю викладача)
+
+**Критерій spec:** відсутній — додано «діаграма в UML use-case нотації: еліпси UC, актори-фігури, рамка системи; канонічний source PlantUML».
+**Знайдено:** `usecase.mmd` (Mermaid `graph LR`) рендерив акторів КРУГАМИ `((Actor))`, UC — ПРЯМОКУТНИКАМИ `[UC1]` і взагалі без рамки системи — це flowchart-нотація, не UML use case. В .drawio нотація була правильною — два артефакти виглядали по-різному.
+**Виправив:** канонічний source переписано на PlantUML `usecase.puml` (еліпси, umlActor, `rectangle "VideoHub System"` boundary, `User --|> Guest`, `..>` include/extend); PNG перерендерено через PlantUML; `usecase.mmd` видалено щоб не тримати два розбіжні джерела.
+**Коміт spec+модель:** цей коміт (spec.md, usecase.puml, usecase.drawio, renders/usecase.png, requirements.md)
+
+### 6. Вимоги без поділу на функціональні/нефункціональні + альтернативні потоки не задокументовані (знайдено при рев'ю викладача)
+
+**Критерій spec:** відсутній — додано «вимоги розбиті на функціональні і нефункціональні» і «кожен UC має покроковий сценарій: основний + альтернативні потоки».
+**Знайдено:** (a) таблиця REQ називалась просто «EARS-вимоги» — без явного «функціональні»; NFR відсутні. (b) REQ11 було припарковане «непокритою» хоча це функціональна вимога, покрита UC3 як альтернативний потік. (c) жоден UC не мав покрокового сценарію з альтернативними потоками — лише Gherkin-приймальні тести (це інший рівень).
+**Виправив:** секція «Функціональні вимоги (EARS)» з REQ11 у таблиці; додано «Нефункціональні вимоги (NFR)»; REQ11 → покрита UC3 alt-flow A3; новий файл `usecases.md` — опис кожного елемента діаграми + main flow + alternative flows для всіх 9 UC (A1-A4 у UC3 = ті ж гілки що в sequence Lab 3).
+**Коміт spec+модель:** цей коміт

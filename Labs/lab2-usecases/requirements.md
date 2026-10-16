@@ -1,4 +1,4 @@
-# EARS-вимоги (Lab 2)
+# Функціональні вимоги (EARS)
 
 | ID | EARS | Тестованість |
 |----|------|-------------|
@@ -12,11 +12,22 @@
 | REQ8 | WHEN user posts comment on video, system SHALL store comment with userId, videoId and timestamp | Так: коментар збережено |
 | REQ9 | WHEN user deletes own comment, system SHALL mark comment as deleted (soft delete) | Так: soft delete |
 | REQ10 | WHILE channel owner views subscriber list, system SHALL display list of users subscribed to their channel | Так: список |
+| REQ11 | IF video upload fails due to invalid format, THEN system SHALL return error with supported formats list | Так: відповідь про помилку |
+
+## Нефункціональні вимоги (NFR)
+
+Поза use-case діаграмою (NFR не мають акторної цілі), але зафіксовані:
+
+| ID | NFR | Пояснення |
+|----|-----|-----------|
+| NFR1 | Перегляд відео доступний без акаунта | випливає з REQ4 (Guest → UC4) |
+| NFR2 | Токен auth має термін дії | безпека: invalid token → 401 |
+| NFR3 | Відео зберігається окремо від метаданих | blob-storage vs БД (див. lab5) |
 
 ## Непокрита вимога
 
-- REQ11: WHEN video upload fails due to invalid format, system SHALL return error with supported formats list
-  - Не покрито use case - це винятковий сценарій UC3 (Upload Video), не окремий UC. Пояснення: обробка помилок всередині UC3, не потребує окремого сценарію на діаграмі.
+- REQ10 (subscriber list) — не має окремого UC: це частина UC7 з точки зору channel owner. Свідомо залишена непокритою з поясненням (критерій завдання ≥1 непокритої).
+- REQ11 — покрита UC3 як **альтернативний потік A3** (invalid format → error), описаний у `usecases.md`. На діаграмі не окремий еліпс — обробка помилок всередині UC3.
 
 ---
 
@@ -123,7 +134,7 @@ Scenario: Guest searches for videos
 | REQ7 | US1 | UC8 | Search |
 | REQ8 | US6 | UC5 | - |
 | REQ9 | US9 | UC5 | - |
-| REQ10 | - | - | - |
-| REQ11 | - | - | - (непокрита, див. пояснення вище) |
+| REQ10 | - | - | - (непокрита свідомо, див. пояснення) |
+| REQ11 | - | UC3 (alt. flow A3) | - |
 
-Покриття: REQ10 (subscriber list) - не має окремого UC, це частина UC7 (Subscribe) з точки зору channel owner. Можна додати UC10 (View Subscribers) якщо треба.
+Покриття: REQ10 (subscriber list) - не має окремого UC, це частина UC7 (Subscribe) з точки зору channel owner. Можна додати UC10 (View Subscribers) якщо треба. REQ11 покрита альтернативним потоком UC3 - див. `usecases.md`, розділ UC3.
