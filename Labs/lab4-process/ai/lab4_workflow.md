@@ -13,7 +13,7 @@ task.md -> spec.md -> AI-драфт діаграми -> AI-аудит за че�
 
 1. **task+spec+readme** — коміт `3b22f6a`: умова, намір, кроки процесу, ролі, критерії прийняття.
 2. **AI-драфт моделі** — коміт `7387de9`: `activity.mmd` (Mermaid flowchart) + чернетковий PNG. AI обрав flowchart бо «просто і рендериться» — це і була головна помилка драфту.
-3. **AI-аудит** — `ai/prompts.md` P1–P4: чек-лист з task.md, прогін по драфту, критична оцінка нотації (урок Lab 2), звірка з sequence Lab 3. Результат: 4 файндінги в `ai/audit.md`.
+3. **AI-аудит** — `ai/prompts.md` P1–P3: чек-лист з task.md, прогін по драфту, критична оцінка нотації (урок Lab 2), звірка з sequence Lab 3. Результат: 4 файндінги в `ai/audit.md`.
 4. **Фікс spec+model одним комітом** — `0630d3a`: spec-критерії уточнено (UML-нотація, parity з sequence, swimlanes, розширення->ADR), модель переписана на `activity.puml` (partitions, 409/dedup, справжні fork/join), `.mmd` видалено, ADR-004 переглянуто.
 5. **Рендери** — `75e8a74`: PNG з PlantUML + `activity.drawio` синхронно.
 6. **AUDIT + DEFENSE** — файндінги за форматом «критерій->коміт»; DEFENSE за шаблоном викладача.
