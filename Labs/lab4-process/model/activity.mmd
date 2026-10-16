@@ -1,0 +1,20 @@
+---
+title: VideoHub Upload Video - Activity v3
+---
+flowchart TD
+    A([Start]) --> B[Fill form: title, description, url]
+    B --> C[Click Submit]
+    C --> D{Token valid?}
+    D -->|No| E[Return 401 Unauthorized]
+    E --> F([End])
+    D -->|Yes| G{Title not empty?}
+    G -->|No| H[Return 400 Bad Request]
+    H --> F
+    G -->|Yes| I[Create Video in DB]
+    I --> J{{fork}}
+    J --> K[Notify subscribers]
+    J --> L[Index video for search]
+    K --> M{{join}}
+    L --> M
+    M --> N[Return 201 videoId]
+    N --> F
