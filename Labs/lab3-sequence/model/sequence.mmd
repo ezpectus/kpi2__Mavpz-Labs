@@ -10,29 +10,28 @@ sequenceDiagram
 
     User->>VideoController: POST /api/videos (title, description, url, token)
     VideoController->>AuthService: validateToken(token)
+    AuthService-->>VideoController: userId or null
 
-    alt token invalid
-        AuthService-->>VideoController: null
+    break token invalid
         VideoController-->>User: 401 Unauthorized
-    else token valid
-        AuthService-->>VideoController: userId
-
-        alt title is empty
-            VideoController-->>User: 400 Bad Request
-        else title ok
-            VideoController->>VideoService: uploadVideo(userId, title, description, url)
-            VideoService->>Database: findByAuthorAndUrl(authorId = userId, url)
-
-            alt url already uploaded by this author
-                Database-->>VideoService: conflict
-                VideoService-->>VideoController: conflict
-                VideoController-->>User: 409 Conflict
-            else no duplicate found
-                Database-->>VideoService: not found
-                VideoService->>Database: createVideo(authorId = userId, title, description, url)
-                Database-->>VideoService: videoId
-                VideoService-->>VideoController: videoId
-                VideoController-->>User: 201 Created (videoId)
-            end
-        end
     end
+
+    VideoController->>VideoController: validate input (title, format)
+
+    break title empty or invalid format
+        VideoController-->>User: 400 Bad Request
+    end
+
+    VideoController->>VideoService: uploadVideo(userId, title, description, url)
+    VideoService->>Database: findByAuthorAndUrl(authorId = userId, url)
+    Database-->>VideoService: video or not found
+
+    break duplicate found
+        VideoService-->>VideoController: conflict
+        VideoController-->>User: 409 Conflict
+    end
+
+    VideoService->>Database: createVideo(authorId = userId, title, description, url)
+    Database-->>VideoService: videoId
+    VideoService-->>VideoController: videoId
+    VideoController-->>User: 201 Created (videoId)
