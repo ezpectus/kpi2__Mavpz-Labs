@@ -1,0 +1,43 @@
+@startuml
+title UC3 Upload Video - Activity (VideoHub)
+
+|User|
+start
+:Open upload form;
+:Fill title, description, url;
+:Click Submit;
+
+|VideoHub System|
+:Validate auth token;
+if (token valid?) then (no)
+  :Return 401 Unauthorized;
+  stop
+else (yes)
+endif
+
+:Validate input (title, format);
+if (input valid?) then (no)
+  :Return 400 Bad Request;
+  stop
+else (yes)
+endif
+
+:findByAuthorAndUrl(authorId = userId, url);
+if (duplicate found?) then (yes)
+  :Return 409 Conflict;
+  stop
+else (no)
+endif
+
+:Create Video in DB;
+
+fork
+  :Notify subscribers;
+fork again
+  :Index video for search;
+end fork
+
+:Return 201 Created + videoId;
+stop
+
+@enduml
