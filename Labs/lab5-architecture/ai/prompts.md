@@ -67,6 +67,8 @@ Lab 5 зроблена AI-шляхом (рішення після Lab 1–3, п�
 > **Self-verification:** every required interface has exactly one provider inside the boundary; nothing crosses the boundary except OAuth and Email edges; every UC1–UC9 maps to >=1 component; no dangling edges.
 > **Output:** PNG + drawio XML + per-item verification result.
 
+Результат: перший рендер спіймав візуальний баг — `Google OAuth`/`Email/SMS Gateway` опинились всередині рамки `rectangle "VideoHub System"` (layout-прижим, якого текстовий чек-лист не бачить). Фікс: `package "External Systems"` навколо зовнішніх — коміт `282bf83`.
+
 ## P6 — AUDIT in review format (SWE-2 Max, writer)
 
 > **Task:** AUDIT.md, format «criterion -> found (quote) -> fixed -> commit» ("цей коміт" if pending). Findings: notation (graph TD not component); boundary as subgraph-approximation; interfaces as edge-labels not provided/required; EmailGateway untraced -> resolved via ADR-005; missing traceability matrix -> added as coverage table. Embed the UC->component matrix as proof of coverage.
