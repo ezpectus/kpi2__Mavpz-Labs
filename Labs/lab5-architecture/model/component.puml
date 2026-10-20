@@ -1,0 +1,61 @@
+@startuml
+title VideoHub Architecture - Component Diagram
+
+actor User
+
+rectangle "VideoHub System" {
+
+  [Frontend\n(Next.js)] as FE
+  [API Gateway\n(Express)] as GW
+  [Auth Service] as AUTH
+  [Video Service] as VS
+  [Comment Service] as CS
+  [Search Service] as SS
+  [Notification Service] as NS
+  [Data Access Layer\n(Prisma)] as DAL
+  database "PostgreSQL" as DB
+
+  () "IRestApi" as IRestApi
+  () "IAuth" as IAuth
+  () "IVideoOps" as IVideoOps
+  () "ICommentOps" as ICommentOps
+  () "ISearch" as ISearch
+  () "ISearchIndex" as ISearchIndex
+  () "INotify" as INotify
+  () "IDataAccess" as IDataAccess
+
+  GW - IRestApi
+  AUTH - IAuth
+  VS - IVideoOps
+  CS - ICommentOps
+  SS - ISearch
+  SS - ISearchIndex
+  NS - INotify
+  DAL - IDataAccess
+}
+
+[Google OAuth] as GOOGLE
+[Email/SMS Gateway] as EMAIL
+
+() "IGoogleOAuth" as IGoogleOAuth
+() "IEmailGateway" as IEmailGateway
+GOOGLE - IGoogleOAuth
+EMAIL - IEmailGateway
+
+User --> FE : uses
+FE ..> IRestApi
+GW ..> IAuth : requires
+GW ..> IVideoOps : requires
+GW ..> ICommentOps : requires
+GW ..> ISearch : requires
+VS ..> INotify : requires
+VS ..> ISearchIndex : requires
+AUTH ..> IDataAccess : requires
+VS ..> IDataAccess : requires
+CS ..> IDataAccess : requires
+SS ..> IDataAccess : requires
+DAL --> DB : persists
+AUTH ..> IGoogleOAuth : requires
+NS ..> IEmailGateway : requires
+
+@enduml

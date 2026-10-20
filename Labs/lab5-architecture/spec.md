@@ -28,16 +28,22 @@
 ## Інтерфейси
 
 ### Provided (система надає)
-- `IREST API` - REST endpoints (provided by API Gateway)
+- `IRestApi` - REST endpoints (provided by API Gateway)
 - `IAuth` - автентифікація (provided by Auth Service)
 - `IVideoOps` - операції з відео (provided by Video Service)
 - `ICommentOps` - операції з коментарями (provided by Comment Service)
 - `ISearch` - пошук (provided by Search Service)
+- `ISearchIndex` - індексування відео (provided by Search Service)
+- `INotify` - сповіщення (provided by Notification Service)
+- `IDataAccess` - доступ до БД (provided by Data Access Layer)
 
 ### Required (система потребує)
-- `IGoogleOAuth` - Google OAuth (required by Auth Service)
-- `IEmailGateway` - email/SMS (required by Notification Service)
-- `IDataAccess` - доступ до БД (required by services, provided by Data Access Layer)
+- `IRestApi` - required by Frontend
+- `IAuth`, `IVideoOps`, `ICommentOps`, `ISearch` - required by API Gateway
+- `INotify`, `ISearchIndex`, `IDataAccess` - required by Video Service
+- `IDataAccess` - required by Auth/Comment/Search Services
+- `IGoogleOAuth` - Google OAuth (required by Auth Service, зовнішній)
+- `IEmailGateway` - email/SMS (required by Notification Service, зовнішній — ADR-005)
 
 ## Межа системи
 
@@ -54,3 +60,6 @@
 - [x] Узгодженість з UC (Lab 2)
 - [x] Узгодженість з Sequence (Lab 3)
 - [x] Узгодженість з Activity (Lab 4)
+- [x] Діаграма в UML component-нотації — канонічний source PlantUML `model/component.puml` («component»-стереотипи, provided lollipop / required socket, межа як first-class елемент `rectangle`); Mermaid `graph TD` не має component-нотації — лише мітки ребер (прецедент Lab 2 і Lab 4)
+- [x] Матриця трасування: кожен компонент і кожна залежність має слід у Lab 1–4 (UC/REQ/lifeline/activity-крок) — доведено таблицею в AUDIT.md; жоден UC1–UC9 без компонента
+- [x] Email/SMS Gateway — задокументоване доменне розширення (ADR-005): канал сповіщень для REQ6 і кроку Notify (Lab 4), поза REQ явно позначено
