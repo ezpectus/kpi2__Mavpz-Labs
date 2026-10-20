@@ -27,4 +27,4 @@
 
 ## 5. Здача
 
-Посилання на GitHub PR: (див. submit/defense.txt) + цей заповнений DEFENSE.
+Посилання на GitHub PR: https://github.com/ezpectus/kpi2__Mavpz-Labs/pull/5 + цей заповнений DEFENSE.
