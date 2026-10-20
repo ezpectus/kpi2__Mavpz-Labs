@@ -1,0 +1,33 @@
+---
+title: VideoHub Architecture v3
+---
+graph TD
+    subgraph System
+        Frontend[Frontend\nNext.js]
+        APIGateway[API Gateway\nExpress]
+        AuthService[Auth Service]
+        VideoService[Video Service]
+        CommentService[Comment Service]
+        NotificationService[Notification Service]
+        SearchService[Search Service]
+        DAL[Data Access Layer\nPrisma]
+        DB[(PostgreSQL)]
+    end
+
+    GoogleOAuth[Google OAuth\nExternal]
+    EmailGateway[Email/SMS Gateway\nExternal]
+
+    Frontend -->|IREST API| APIGateway
+    APIGateway -->|IAuth| AuthService
+    APIGateway -->|IVideoOps| VideoService
+    APIGateway -->|ICommentOps| CommentService
+    AuthService -->|IDataAccess| DAL
+    VideoService -->|IDataAccess| DAL
+    CommentService -->|IDataAccess| DAL
+    VideoService -->|INotify| NotificationService
+    VideoService -->|ISearch| SearchService
+    SearchService -->|IDataAccess| DAL
+    DAL --> DB
+
+    AuthService -.->|IGoogleOAuth| GoogleOAuth
+    NotificationService -.->|IEmailGateway| EmailGateway
