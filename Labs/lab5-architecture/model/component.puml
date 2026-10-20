@@ -34,28 +34,29 @@ rectangle "VideoHub System" {
   DAL - IDataAccess
 }
 
-[Google OAuth] as GOOGLE
-[Email/SMS Gateway] as EMAIL
-
-() "IGoogleOAuth" as IGoogleOAuth
-() "IEmailGateway" as IEmailGateway
-GOOGLE - IGoogleOAuth
-EMAIL - IEmailGateway
+package "External Systems" {
+  () "IGoogleOAuth" as IGoogleOAuth
+  () "IEmailGateway" as IEmailGateway
+  [Google OAuth] as GOOGLE
+  [Email/SMS Gateway] as EMAIL
+  GOOGLE - IGoogleOAuth
+  EMAIL - IEmailGateway
+}
 
 User --> FE : uses
 FE ..> IRestApi
-GW ..> IAuth : requires
-GW ..> IVideoOps : requires
-GW ..> ICommentOps : requires
-GW ..> ISearch : requires
-VS ..> INotify : requires
-VS ..> ISearchIndex : requires
-AUTH ..> IDataAccess : requires
-VS ..> IDataAccess : requires
-CS ..> IDataAccess : requires
-SS ..> IDataAccess : requires
-DAL --> DB : persists
-AUTH ..> IGoogleOAuth : requires
-NS ..> IEmailGateway : requires
+GW ..> IAuth
+GW ..> IVideoOps
+GW ..> ICommentOps
+GW ..> ISearch
+VS ..> INotify
+VS ..> ISearchIndex
+AUTH ..> IDataAccess
+VS ..> IDataAccess
+CS ..> IDataAccess
+SS ..> IDataAccess
+DAL --> DB
+AUTH ..> IGoogleOAuth
+NS ..> IEmailGateway
 
 @enduml
