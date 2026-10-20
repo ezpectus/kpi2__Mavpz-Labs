@@ -10,12 +10,13 @@ VideoHub - платформа для завантаження та перегл�
 
 Система складається з:
 - **Frontend** (Next.js) - UI, рендеринг сторінок
-- **Backend API** (Express) - REST API, контролери
+- **API Gateway** (Express) - REST API, контролери, вхідна точка
 - **Auth Service** - JWT + Google OAuth
 - **Video Service** - бізнес-логіка відео
 - **Comment Service** - бізнес-логіка коментарів
 - **Notification Service** - сповіщення підписникам
 - **Search Service** - індексування і пошук
+- **Data Access Layer** (Prisma) - єдина точка доступу до даних
 - **Database** (PostgreSQL) - зберігання даних
 - **Google OAuth** (зовнішня інтеграція) - автентифікація
 - **Email/SMS Gateway** (зовнішня інтеграція) - канал сповіщень (ADR-005)
