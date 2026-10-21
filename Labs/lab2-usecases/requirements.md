@@ -1,4 +1,4 @@
-# EARS-вимоги (Lab 2)
+# Функціональні вимоги (EARS)
 
 | ID | EARS | Тестованість |
 |----|------|-------------|
@@ -12,11 +12,27 @@
 | REQ8 | WHEN user posts comment on video, system SHALL store comment with userId, videoId and timestamp | Так: коментар збережено |
 | REQ9 | WHEN user deletes own comment, system SHALL mark comment as deleted (soft delete) | Так: soft delete |
 | REQ10 | WHILE channel owner views subscriber list, system SHALL display list of users subscribed to their channel | Так: список |
+| REQ11 | IF video upload fails due to invalid format, THEN system SHALL return error with supported formats list | Так: відповідь про помилку |
+
+## Нефункціональні вимоги (NFR)
+
+NFR — це атрибути якості (performance, security, usability тощо), а не акторні цілі: тому вони **поза use-case діаграмою** — їх не можна намалювати еліпсом. Цільові значення для домену відео-хостингу:
+
+| ID | Категорія | NFR | Тестованість |
+|----|-----------|-----|--------------|
+| NFR1 | Performance | Сторінка відео відкривається ≤ 2 с при нормальному навантаженні | Так: вимірюється часом відповіді |
+| NFR2 | Performance | Пошук (REQ7) повертає результати ≤ 1 с | Так: час запиту |
+| NFR3 | Availability | Сервіс доступний ≥ 99% часу (допустимий простій ~3.6 доби/рік) | Так: моніторинг uptime |
+| NFR4 | Security | Auth-токен має термін дії; недійсний токен відхиляється (401) | Так: тест з простроченим токеном |
+| NFR5 | Security | Паролі не зберігаються у відкритому вигляді (хеш або OAuth через Google) | Так: ревью сховища |
+| NFR6 | Usability | Реєстрація/логін виконується ≤ 3 кроків від головної сторінки | Так: кількість кроків |
+| NFR7 | Capacity | Upload підтримує файли до 2 ГБ у форматах з переліку REQ11 | Так: граничний тест файлом |
+| NFR8 | Scalability | Відеофайли зберігаються в blob-storage окремо від метаданих у БД — сховище масштабується незалежно | Так: огляд архітектури (див. lab5) |
 
 ## Непокрита вимога
 
-- REQ11: WHEN video upload fails due to invalid format, system SHALL return error with supported formats list
-  - Не покрито use case - це винятковий сценарій UC3 (Upload Video), не окремий UC. Пояснення: обробка помилок всередині UC3, не потребує окремого сценарію на діаграмі.
+- REQ10 (subscriber list) — не має окремого UC: це частина UC7 з точки зору channel owner. Свідомо залишена непокритою з поясненням (критерій завдання ≥1 непокритої).
+- REQ11 — покрита UC3 як **альтернативний потік A3** (invalid format → error), описаний у `usecases.md`. На діаграмі не окремий еліпс — обробка помилок всередині UC3.
 
 ---
 
@@ -26,8 +42,8 @@
 |----|-------|
 | US1 | As a Guest, I want to search videos by title so that I can find content without registering |
 | US2 | As a Guest, I want to watch videos so that I can view content |
-| US3 | As a User, I want to register with email so that I can have an account |
-| US4 | As a User, I want to login with Google so that I don't need to remember another password |
+| US3 | As a Guest, I want to register with email so that I can become a User |
+| US4 | As a Guest, I want to login with Google so that I can access my account |
 | US5 | As a User, I want to upload videos so that I can share my content |
 | US6 | As a User, I want to comment on videos so that I can discuss content |
 | US7 | As a User, I want to like videos so that I can show appreciation |
@@ -123,7 +139,7 @@ Scenario: Guest searches for videos
 | REQ7 | US1 | UC8 | Search |
 | REQ8 | US6 | UC5 | - |
 | REQ9 | US9 | UC5 | - |
-| REQ10 | - | - | - |
-| REQ11 | - | - | - (непокрита, див. пояснення вище) |
+| REQ10 | - | - | - (непокрита свідомо, див. пояснення) |
+| REQ11 | - | UC3 (alt. flow A3) | - |
 
-Покриття: REQ10 (subscriber list) - не має окремого UC, це частина UC7 (Subscribe) з точки зору channel owner. Можна додати UC10 (View Subscribers) якщо треба.
+Покриття: REQ10 (subscriber list) - не має окремого UC, це частина UC7 (Subscribe) з точки зору channel owner. Можна додати UC10 (View Subscribers) якщо треба. REQ11 покрита альтернативним потоком UC3 - див. `usecases.md`, розділ UC3.
