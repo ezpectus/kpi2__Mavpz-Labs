@@ -2,32 +2,30 @@
 
 ## Метод
 
-Порівняв модель (er.mmd) з spec.md і з реальним проєктом VideoHub (Prisma schema).
+Звіряв модель (er.mmd) зі spec.md і Prisma-схемою джерельного VideoHub. Переписано після рев'ю у форматі "критерій spec ↔ артефакт ↔ коміт, що змінює spec разом із моделлю".
 
-## Знайдені проблеми
+## Розбіжності spec ↔ артефакт
 
-### 1. Like - прямий M:N замість асоціативної сутності
+### 1. Критерій "коли M:N стає сутністю" був відсутній у spec
 
-В v1 було: `User }|--|{ Video : "likes"` - пряме M:N без асоціативної сутності.
-В spec пункт 4: "User - Video: many-to-many через Like (асоціативна сутність)".
-В Prisma: Like - окрема модель з FK на User і Video + @@unique([userId, videoId]).
+**Було:** спека не містила правила, тому фікс `6a26223` обґрунтовував Like-сутність хибним критерієм "прямий M:N — помилка". Насправді чистий M:N без власних атрибутів — нормальний зв'язок; асоціативна сутність потрібна лише коли зв'язок має власні дані.
 
-Виправив: розгорнув M:N через Like як асоціативну сутність (User ||--o{ Like, Video ||--o{ Like).
-Commit: `lab1: fix - like as associative entity not direct M:N`
+**Уточнив у spec:** правило "зв'язок стає сутністю лише якщо має власні атрибути". Like має `createdAt` (коли користувач поставив лайк — дані домену) → сутність виправдана саме цим атрибутом.
 
-### 2. Subscription - прямий M:N замість асоціативної сутності
+**Коміти:** `0b38258` (createdAt у моделі) + `78d0c7f` (критерій у spec + модель разом).
 
-В v1 було: `User }|--|{ User : "subscribes to"` - пряме M:N self-referencing.
-В spec пункт 5: "User - User: many-to-many через Subscription (self-referencing, асоціативна сутність)".
-В Prisma: Subscription - окрема модель з двома FK на User + @@unique([subscriberId, channelId]).
+### 2. Unique-обмеження невидимі в рендері
 
-Виправив: розгорнув M:N через Subscription (User ||--o{ Subscription "subscriber", User ||--o{ Subscription "channel").
-Commit: `lab1: fix - subscription as associative entity + unique note`
+**Було:** `c319a9d` поклав унікальність у `%%`-коментарі — у PNG не видно. Твердження "Mermaid не має unique-нотації" було хибним: є маркер `UK` на атрибуті.
 
-### 3. Unique-обмеження не показані на діаграмі
+**Уточнив у spec:** критерій "унікальні атрибути позначені маркером UK (видно в рендері); складені пари — текстом у spec". У моделі: `UK` на `email`, `username`, `googleId`. Складені пари `(userId, videoId)` і `(subscriberId, channelId)` — у spec, бо Mermaid не має composite-UK (чесно зафіксоване обмеження нотації).
 
-В v1 не було позначено unique-обмеження. В spec: email unique, username unique, googleId unique, (userId, videoId) unique, (subscriberId, channelId) unique.
-Mermaid erDiagram не підтримує unique-нотацію на діаграмі.
+**Коміт:** `78d0c7f` (spec + er.mmd + render разом).
 
-Виправив: додав comment-блок з unique-обмеженнями на діаграму.
-Commit: `lab1: fix - subscription as associative entity + unique note` (той самий - unique туди ж)
+### 3. Рендер відставав від source
+
+**Було:** `er.png` не показував `Like.createdAt`, хоча source його мав; критерію "рендер синхронний із source" у spec явно не стояло.
+
+**Уточнив у spec:** критерій "PNG і drawio синхронні з er.mmd"; перегенеровано PNG (тепер з UK-маркерами), drawio-позначки приведено до UK.
+
+**Коміти:** `4a7035e` (історичний re-render) + `78d0c7f` (рендер із UK).
