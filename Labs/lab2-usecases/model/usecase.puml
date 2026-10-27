@@ -1,0 +1,43 @@
+@startuml
+title VideoHub Use Cases v4
+left to right direction
+skinparam actorStyle awesome
+
+actor Guest
+actor User
+actor "Google OAuth" as Google <<system>>
+
+User --|> Guest : generalization
+
+rectangle "VideoHub System" {
+    usecase UC1 as "UC1 Register"
+    usecase UC2 as "UC2 Login"
+    usecase UC3 as "UC3 Upload Video"
+    usecase UC4 as "UC4 Watch Video"
+    usecase UC5 as "UC5 Comment"
+    usecase UC6 as "UC6 Like Video"
+    usecase UC7 as "UC7 Subscribe"
+    usecase UC8 as "UC8 Search Videos"
+    usecase UC9 as "UC9 Authenticate"
+}
+
+Guest --> UC1
+Guest --> UC2
+Guest --> UC4
+Guest --> UC8
+
+User --> UC3
+User --> UC5
+User --> UC6
+User --> UC7
+
+Google --> UC9
+
+UC2 ..> UC9 : <<include>>
+UC3 ..> UC9 : <<include>>
+UC5 ..> UC9 : <<include>>
+UC6 ..> UC9 : <<include>>
+UC7 ..> UC9 : <<include>>
+
+UC8 ..> UC4 : <<extend>>
+@enduml
