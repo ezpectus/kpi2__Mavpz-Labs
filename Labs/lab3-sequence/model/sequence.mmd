@@ -1,0 +1,37 @@
+---
+title: VideoHub Upload Video - Sequence
+---
+sequenceDiagram
+    actor User
+    participant VideoController
+    participant AuthService
+    participant VideoService
+    participant Database
+
+    User->>VideoController: POST /api/videos (title, description, url, token)
+    VideoController->>AuthService: validateToken(token)
+    AuthService-->>VideoController: userId or null
+
+    break token invalid
+        VideoController-->>User: 401 Unauthorized
+    end
+
+    VideoController->>VideoController: validate input (title, format)
+
+    break title empty or invalid format
+        VideoController-->>User: 400 Bad Request
+    end
+
+    VideoController->>VideoService: uploadVideo(userId, title, description, url)
+    VideoService->>Database: findByAuthorAndUrl(authorId = userId, url)
+    Database-->>VideoService: video or not found
+
+    break duplicate found
+        VideoService-->>VideoController: conflict
+        VideoController-->>User: 409 Conflict
+    end
+
+    VideoService->>Database: createVideo(authorId = userId, title, description, url)
+    Database-->>VideoService: videoId
+    VideoService-->>VideoController: videoId
+    VideoController-->>User: 201 Created (videoId)
