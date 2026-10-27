@@ -1,0 +1,74 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="VideoHub Components">
+    <mxGraphModel dx="900" dy="650" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="user" value="User" style="shape=umlActor;html=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="20" width="30" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="boundary" value="VideoHub System" style="rounded=0;html=1;align=center;verticalAlign=top;fontStyle=1;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="800" height="640" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fe" value="Frontend (Next.js)" style="shape=component;html=1;" vertex="1" parent="1">
+          <mxGeometry x="470" y="160" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="gw" value="API Gateway (Express)" style="shape=component;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="300" width="140" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="auth" value="Auth Service" style="shape=component;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="450" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="vs" value="Video Service" style="shape=component;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="450" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="cs" value="Comment Service" style="shape=component;html=1;" vertex="1" parent="1">
+          <mxGeometry x="420" y="450" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ss" value="Search Service" style="shape=component;html=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="450" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ns" value="Notification Service" style="shape=component;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="580" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="dal" value="Data Access Layer (Prisma)" style="shape=component;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="580" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="db" value="PostgreSQL" style="shape=cylinder;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="690" width="80" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ext" value="External Systems" style="rounded=0;html=1;align=center;verticalAlign=top;fontStyle=1;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="880" y="560" width="300" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="google" value="Google OAuth" style="shape=component;html=1;" vertex="1" parent="1">
+          <mxGeometry x="910" y="600" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="email" value="Email/SMS Gateway" style="shape=component;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="600" width="120" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="user" target="fe"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e2" value="IRestApi" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;endArrow=open;" edge="1" parent="1" source="fe" target="gw"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e3" value="IAuth" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;endArrow=open;" edge="1" parent="1" source="gw" target="auth"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e4" value="IVideoOps" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;endArrow=open;" edge="1" parent="1" source="gw" target="vs"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e5" value="ICommentOps" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;endArrow=open;" edge="1" parent="1" source="gw" target="cs"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e6" value="ISearch" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;endArrow=open;" edge="1" parent="1" source="gw" target="ss"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e7" value="INotify" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;endArrow=open;" edge="1" parent="1" source="vs" target="ns"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e8" value="ISearchIndex" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;endArrow=open;" edge="1" parent="1" source="vs" target="ss"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e9" value="IDataAccess" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;endArrow=open;" edge="1" parent="1" source="auth" target="dal"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e10" value="IDataAccess" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;endArrow=open;" edge="1" parent="1" source="vs" target="dal"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e11" value="IDataAccess" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;endArrow=open;" edge="1" parent="1" source="cs" target="dal"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e12" value="IDataAccess" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;endArrow=open;" edge="1" parent="1" source="ss" target="dal"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e13" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="dal" target="db"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e14" value="IGoogleOAuth" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;endArrow=open;" edge="1" parent="1" source="auth" target="google"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e15" value="IEmailGateway" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;endArrow=open;" edge="1" parent="1" source="ns" target="email"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
