@@ -5,7 +5,7 @@
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
 
-        <mxCell id="User" value="&lt;b&gt;USER&lt;/b&gt;&lt;hr&gt;id PK UUID&lt;br&gt;email UQ&lt;br&gt;username UQ&lt;br&gt;password?&lt;br&gt;googleId? UQ&lt;br&gt;avatar?&lt;br&gt;banner?&lt;br&gt;description?&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="User" value="&lt;b&gt;USER&lt;/b&gt;&lt;hr&gt;id PK UUID&lt;br&gt;email UK&lt;br&gt;username UK&lt;br&gt;password?&lt;br&gt;googleId? UK&lt;br&gt;avatar?&lt;br&gt;banner?&lt;br&gt;description?&lt;br&gt;createdAt" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="60" y="180" width="190" height="200" as="geometry" />
         </mxCell>
 
@@ -17,11 +17,11 @@
           <mxGeometry x="440" y="300" width="190" height="120" as="geometry" />
         </mxCell>
 
-        <mxCell id="Like" value="&lt;b&gt;LIKE&lt;/b&gt;&lt;hr&gt;id PK UUID&lt;br&gt;userId FK&lt;br&gt;videoId FK&lt;br&gt;createdAt&lt;br&gt;UQ(userId, videoId)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="Like" value="&lt;b&gt;LIKE&lt;/b&gt;&lt;hr&gt;id PK UUID&lt;br&gt;userId FK&lt;br&gt;videoId FK&lt;br&gt;createdAt&lt;br&gt;UK(userId, videoId)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="440" y="490" width="190" height="110" as="geometry" />
         </mxCell>
 
-        <mxCell id="Subscription" value="&lt;b&gt;SUBSCRIPTION&lt;/b&gt;&lt;hr&gt;id PK UUID&lt;br&gt;subscriberId FK -&amp;gt; User&lt;br&gt;channelId FK -&amp;gt; User&lt;br&gt;createdAt&lt;br&gt;UQ(subscriberId, channelId)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="Subscription" value="&lt;b&gt;SUBSCRIPTION&lt;/b&gt;&lt;hr&gt;id PK UUID&lt;br&gt;subscriberId FK -&amp;gt; User&lt;br&gt;channelId FK -&amp;gt; User&lt;br&gt;createdAt&lt;br&gt;UK(subscriberId, channelId)" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="50" y="520" width="210" height="120" as="geometry" />
         </mxCell>
 
@@ -53,7 +53,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <mxCell id="note" value="Like i Subscription - асоціативні сутності для M:N. Subscription - self-referencing (обидва FK -&amp;gt; User). UQ = unique constraint." style="text;html=1;align=left;verticalAlign=top;fontSize=11;fontColor=#666666;" vertex="1" parent="1">
+        <mxCell id="note" value="Like i Subscription - асоціативні сутності для M:N. Subscription - self-referencing (обидва FK -&amp;gt; User). UK = unique constraint." style="text;html=1;align=left;verticalAlign=top;fontSize=11;fontColor=#666666;" vertex="1" parent="1">
           <mxGeometry x="60" y="680" width="570" height="40" as="geometry" />
         </mxCell>
 
