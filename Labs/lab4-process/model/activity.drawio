@@ -1,0 +1,118 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="UC3 Activity">
+    <mxGraphModel dx="800" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="laneU" value="User" style="swimlane;horizontal=0;startSize=30;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="200" height="1240" as="geometry" />
+        </mxCell>
+        <mxCell id="laneS" value="VideoHub System" style="swimlane;horizontal=0;startSize=30;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="40" width="560" height="1240" as="geometry" />
+        </mxCell>
+
+        <mxCell id="start" value="" style="ellipse;html=1;fillColor=#000000;" vertex="1" parent="laneU">
+          <mxGeometry x="85" y="50" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" value="Open upload form" style="rounded=1;html=1;whiteSpace=wrap;" vertex="1" parent="laneU">
+          <mxGeometry x="45" y="110" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" value="Fill title, description, url" style="rounded=1;html=1;whiteSpace=wrap;" vertex="1" parent="laneU">
+          <mxGeometry x="40" y="180" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" value="Click Submit" style="rounded=1;html=1;whiteSpace=wrap;" vertex="1" parent="laneU">
+          <mxGeometry x="50" y="250" width="100" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="s1" value="Validate auth token" style="rounded=1;html=1;whiteSpace=wrap;" vertex="1" parent="laneS">
+          <mxGeometry x="225" y="50" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="d1" value="token valid?" style="rhombus;html=1;whiteSpace=wrap;" vertex="1" parent="laneS">
+          <mxGeometry x="235" y="120" width="90" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="Return 401 Unauthorized" style="rounded=1;html=1;whiteSpace=wrap;" vertex="1" parent="laneS">
+          <mxGeometry x="100" y="135" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="end1" value="" style="ellipse;html=1;fillColor=#000000;shape=end;" vertex="1" parent="laneS">
+          <mxGeometry x="140" y="200" width="30" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="s2" value="Validate input (title, format)" style="rounded=1;html=1;whiteSpace=wrap;" vertex="1" parent="laneS">
+          <mxGeometry x="215" y="260" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" value="input valid?" style="rhombus;html=1;whiteSpace=wrap;" vertex="1" parent="laneS">
+          <mxGeometry x="235" y="330" width="90" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="Return 400 Bad Request" style="rounded=1;html=1;whiteSpace=wrap;" vertex="1" parent="laneS">
+          <mxGeometry x="100" y="345" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="end2" value="" style="ellipse;html=1;fillColor=#000000;shape=end;" vertex="1" parent="laneS">
+          <mxGeometry x="140" y="410" width="30" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="s3" value="findByAuthorAndUrl(authorId = userId, url)" style="rounded=1;html=1;whiteSpace=wrap;" vertex="1" parent="laneS">
+          <mxGeometry x="190" y="470" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="d3" value="duplicate found?" style="rhombus;html=1;whiteSpace=wrap;" vertex="1" parent="laneS">
+          <mxGeometry x="225" y="540" width="110" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="Return 409 Conflict" style="rounded=1;html=1;whiteSpace=wrap;" vertex="1" parent="laneS">
+          <mxGeometry x="100" y="555" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="end3" value="" style="ellipse;html=1;fillColor=#000000;shape=end;" vertex="1" parent="laneS">
+          <mxGeometry x="140" y="620" width="30" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="s4" value="Create Video in DB" style="rounded=1;html=1;whiteSpace=wrap;" vertex="1" parent="laneS">
+          <mxGeometry x="230" y="680" width="100" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fork" value="" style="rounded=0;html=1;fillColor=#000000;" vertex="1" parent="laneS">
+          <mxGeometry x="160" y="750" width="240" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="p1" value="Notify subscribers" style="rounded=1;html=1;whiteSpace=wrap;" vertex="1" parent="laneS">
+          <mxGeometry x="170" y="790" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p2" value="Index video for search" style="rounded=1;html=1;whiteSpace=wrap;" vertex="1" parent="laneS">
+          <mxGeometry x="310" y="790" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="join" value="" style="rounded=0;html=1;fillColor=#000000;" vertex="1" parent="laneS">
+          <mxGeometry x="160" y="870" width="240" height="8" as="geometry" />
+        </mxCell>
+
+        <mxCell id="s5" value="Return 201 Created + videoId" style="rounded=1;html=1;whiteSpace=wrap;" vertex="1" parent="laneS">
+          <mxGeometry x="210" y="920" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="endF" value="" style="ellipse;html=1;fillColor=#000000;shape=end;" vertex="1" parent="laneS">
+          <mxGeometry x="265" y="990" width="30" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="f1" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="start" target="a1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f2" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="a1" target="a2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f3" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="a2" target="a3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f4" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="a3" target="s1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f5" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="s1" target="d1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f6" value="no" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="d1" target="e1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f7" value="yes" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="d1" target="s2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f8" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="e1" target="end1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f9" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="s2" target="d2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f10" value="no" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="d2" target="e2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f11" value="yes" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="d2" target="s3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f12" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="e2" target="end2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f13" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="s3" target="d3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f14" value="yes" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="d3" target="e3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f15" value="no" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="d3" target="s4"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f16" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="e3" target="end3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f17" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="s4" target="fork"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f18" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="fork" target="p1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f19" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="fork" target="p2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f20" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="p1" target="join"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f21" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="p2" target="join"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f22" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="join" target="s5"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f23" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="s5" target="endF"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
