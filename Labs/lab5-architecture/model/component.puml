@@ -1,10 +1,13 @@
 @startuml
 title VideoHub Architecture - Component Diagram
 
+left to right direction
+skinparam nodesep 25
+skinparam ranksep 45
+
 actor User
 
 rectangle "VideoHub System" {
-
   [Frontend\n(Next.js)] as FE
   [API Gateway\n(Express)] as GW
   [Auth Service] as AUTH
@@ -14,49 +17,27 @@ rectangle "VideoHub System" {
   [Notification Service] as NS
   [Data Access Layer\n(Prisma)] as DAL
   database "PostgreSQL" as DB
-
-  () "IRestApi" as IRestApi
-  () "IAuth" as IAuth
-  () "IVideoOps" as IVideoOps
-  () "ICommentOps" as ICommentOps
-  () "ISearch" as ISearch
-  () "ISearchIndex" as ISearchIndex
-  () "INotify" as INotify
-  () "IDataAccess" as IDataAccess
-
-  GW - IRestApi
-  AUTH - IAuth
-  VS - IVideoOps
-  CS - ICommentOps
-  SS - ISearch
-  SS - ISearchIndex
-  NS - INotify
-  DAL - IDataAccess
 }
 
 package "External Systems" {
-  () "IGoogleOAuth" as IGoogleOAuth
-  () "IEmailGateway" as IEmailGateway
   [Google OAuth] as GOOGLE
   [Email/SMS Gateway] as EMAIL
-  GOOGLE - IGoogleOAuth
-  EMAIL - IEmailGateway
 }
 
-User --> FE : uses
-FE ..> IRestApi
-GW ..> IAuth
-GW ..> IVideoOps
-GW ..> ICommentOps
-GW ..> ISearch
-VS ..> INotify
-VS ..> ISearchIndex
-AUTH ..> IDataAccess
-VS ..> IDataAccess
-CS ..> IDataAccess
-SS ..> IDataAccess
+User --> FE
+FE ..> GW : IRestApi
+GW ..> AUTH : IAuth
+GW ..> VS : IVideoOps
+GW ..> CS : ICommentOps
+GW ..> SS : ISearch
+VS ..> NS : INotify
+VS ..> SS : ISearchIndex
+AUTH ..> DAL : IDataAccess
+VS ..> DAL : IDataAccess
+CS ..> DAL : IDataAccess
+SS ..> DAL : IDataAccess
 DAL --> DB
-AUTH ..> IGoogleOAuth
-NS ..> IEmailGateway
+AUTH ..> GOOGLE : IGoogleOAuth
+NS ..> EMAIL : IEmailGateway
 
 @enduml

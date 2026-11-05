@@ -60,6 +60,6 @@
 - [x] Узгодженість з UC (Lab 2)
 - [x] Узгодженість з Sequence (Lab 3)
 - [x] Узгодженість з Activity (Lab 4)
-- [x] Діаграма в UML component-нотації — канонічний source PlantUML `model/component.puml` («component»-стереотипи, provided lollipop / required socket, межа як first-class елемент `rectangle`); Mermaid `graph TD` не має component-нотації — лише мітки ребер (прецедент Lab 2 і Lab 4)
+- [x] Діаграма в UML component-нотації — канонічний source PlantUML `model/component.puml` («component»-стереотипи, межа як first-class елемент `rectangle`, зовнішні в `package "External Systems"`); provided/required показані направленими залежностями `consumer ..> provider : IName` — lollipop/socket на 10 інтерфейсах виявився нечитабельним на рендері (дуги через межу, плаваючі мітки) — замінено на мітковані ребра, AUDIT знахідка 6; Mermaid `graph TD` не має component-нотації (прецедент Lab 2 і Lab 4)
 - [x] Матриця трасування: кожен компонент і кожна залежність має слід у Lab 1–4 (UC/REQ/lifeline/activity-крок) — доведено таблицею в AUDIT.md; жоден UC1–UC9 без компонента
 - [x] Email/SMS Gateway — задокументоване доменне розширення (ADR-005): канал сповіщень для REQ6 і кроку Notify (Lab 4), поза REQ явно позначено

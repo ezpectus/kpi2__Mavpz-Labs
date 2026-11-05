@@ -130,3 +130,15 @@ Lab 5 зроблена AI-шляхом (рішення після Lab 1–3, п�
 > **Constraints:** no invented steps — every step must match a real commit; the document must read as "the process that produced these hashes", not as a generic essay.
 >
 > **Closes criterion:** AI trail completeness — файл, який читають, щоб зрозуміти *як саме* AI застосовувався, не тільки *що* було зроблено.
+
+## P10 — layout repair after render feedback (SWE-2 Max)
+
+> **Model:** SWE-2 Max · **Role:** diagram engineer fixing a readability complaint — semantics frozen, only layout may change
+> **Input:** feedback "the render is unreadable — arrows and labels are a mess"; frozen interface/component set from spec.
+> **Task:** Generate several layout candidates for the SAME model (different direction hints, lollipop-attachment styles, grouping), render each, and pick the one a reviewer reads correctly in under 10 seconds. Criteria: no edge crossings through unrelated nodes, interface names attached to their edge, boundary and externals unambiguous.
+> **Constraints:** zero semantic drift — same components, same provided/required pairs, same boundary; if a notation element (ball/socket) cannot survive readable layout at this scale, replace the graphical encoding with directed labeled dependencies and document it as an audit finding — do not silently drop it.
+> **Output:** candidates rendered side by side + chosen `.puml` + updated spec/AUDIT/drawio entries.
+>
+> **Closes criterion:** «рендер читабельний» — діаграма, яку перевіряють очима, має читатись за секунди.
+
+Результат: 4 кандидати (ball-вузли окремо, lollipop-стовпець, top-down з приклеєними ball, left-to-right з міткованими ребрами). Ball/socket у всіх варіантах давало або дуги через межу, або мітки, що налазять одна на одну — строга нотація не масштабується на 10 інтерфейсах. Вибрано left-to-right з `consumer ..> provider : IName`; рішення зафіксовано як AUDIT знахідка 6 + оновлено критерій у spec.md (spec+model+render в одному коміті).

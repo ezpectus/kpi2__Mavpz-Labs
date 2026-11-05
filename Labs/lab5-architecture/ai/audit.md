@@ -45,13 +45,13 @@
 | # | Пункт | Вердикт | Доказ |
 |---|---|---|---|
 | 1 | Компоненти UI/API/сервіси/DAL/БД | PASS | `component.puml`: Frontend, API Gateway, 5 сервісів, DAL, PostgreSQL |
-| 2 | Provided/required-інтерфейси | PASS | `() IAuth/IVideoOps/ICommentOps/ISearch/INotify/ISearchIndex/IDataAccess/IGoogleOAuth/IEmailGateway` — lollipop+socket |
+| 2 | Provided/required-інтерфейси | PASS | IAuth/IVideoOps/ICommentOps/ISearch/INotify/ISearchIndex/IDataAccess/IGoogleOAuth/IEmailGateway — направлені залежності `consumer ..> provider : IName` (ball/socket замінено на мітковані ребра після layout-рев'ю, AUDIT знахідка 6) |
 | 3 | Залежності | PASS | усі ребра через інтерфейси або задокументовані |
 | 4 | Чітка межа системи | PASS | `rectangle "VideoHub System"` — first-class елемент; зовнішні поза нею |
 | 5 | Зовнішні інтеграції | PASS | Google OAuth (REQ2/UC9) + Email/SMS Gateway (ADR-005) |
 | 6 | Одна діаграма + рендер | PASS | `.puml` єдиний source; `.mmd` видалено; `.png`+`.drawio` — рендери |
 | 7 | Трасування lab1–4 | PASS | матриця UC→компонент в AUDIT.md; жоден компонент без сліду, жоден UC без компонента |
-| 8 | Топ-3 розбіжності + коміти | PASS | AUDIT.md — 5 findings + матриця покриття |
+| 8 | Топ-3 розбіжності + коміти | PASS | AUDIT.md — 6 findings + матриця покриття |
 | 9 | DEFENSE «інтеграція ланцюга» | PASS | DEFENSE.md §4: ER→компоненти, UC→компоненти, lifelines→компоненти, activity-кроки→відповідальності |
 
 **FAILів немає.** Зауваження: PR має base `lab4-process` — для чистого дифу; ретаргет на main після мерджів.
