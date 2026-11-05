@@ -2,7 +2,7 @@
 
 ## 1. Намір і критерії
 
-Змоделював архітектуру VideoHub компонентною діаграмою UML (PlantUML): модулі (Frontend, API Gateway, Auth/Video/Comment/Search/Notification Services, Data Access Layer, PostgreSQL), provided/required-інтерфейси як направлені залежності `consumer ..> provider : IName`, межа системи `rectangle`, зовнішні інтеграції (Google OAuth, Email/SMS Gateway). Критерії в spec.md + ключовий: кожен компонент і залежність трасується до ланцюга Lab 1–4 (матриця в AUDIT.md).
+Змоделював архітектуру VideoHub компонентною діаграмою UML: модулі (Frontend, API Gateway, Auth/Video/Comment/Search/Notification Services, Data Access Layer, PostgreSQL), provided/required-інтерфейси як assembly-коннектори (ball на провайдері / socket на споживачі), межа системи, зовнішні інтеграції (Google OAuth, Email/SMS Gateway). Канонічний візуал — `renders/component.png` з ручним лейаутом (`renders/render_component.py`): авто-лейаут на 10 інтерфейсах давав спагетті; `component.puml` + `component.drawio` — текстова модель з тією ж семантикою. Критерії в spec.md + ключовий: кожен компонент і залежність трасується до ланцюга Lab 1–4 (матриця в AUDIT.md).
 
 Лаба зроблена AI-шляхом з двома моделями: SWE-2 Max (драфт/реалізація) + GLM 5.3 Max (adversarial-рев'ю). Слід: `ai/prompts.md`, `ai/audit.md`, `ai/lab5_workflow.md`.
 
@@ -11,7 +11,7 @@
 - **Наближення нотації втретє** — `graph TD` без component-стереотипів, lollipop-інтерфейсів і first-class межі. Прецедент Lab 2/4 — умова дозволяє Mermaid, але нотація оцінюється окремо. Критерій додано: «канонічний source PlantUML». Коміт spec+модель: `371efc9`
 - **Інтерфейси як мітки ребер + зовнішні всередині межі** — provided/required читались тільки текстом spec; на першому рендері Google/Email візуально всередині межі. Виправлено: `() Interface` lollipop/socket + `package "External Systems"`. Коміти: `371efc9`, `282bf83`
 - **Untraced Email/SMS Gateway + відсутня матриця покриття** — AI «дорисував» шлюз без сліду в REQ/UC; покриття ланцюга було неявним. Виправлено: Email/SMS задокументовано в ADR-005 (канал для REQ6 + Notify з Lab 4); матриця UC/REQ/lifeline/activity -> компонент у AUDIT.md — 9/9 UC покриті. Коміти: `371efc9`, `71c9fde` (AUDIT)
-- **Рендер «спагетті» — ball/socket не масштабується** — на першому рендері `() Interface` як окремі вузли: 4 ребра до IDataAccess перетинали полотно, інтерфейси плавали відірваними від провайдерів; `Component -() I` давало дуги через межу. Перегенеровано 4 варіанти layout, вибрано читабельний: направлені залежності з ім'ям контракту на ребрі + `left to right` потік User→Gateway→services→DAL→DB. Семантика provided/required збережена — змінилось графічне кодування. Коміт spec+модель+рендер: поточний
+- **Рендер «спагетті» — авто-лейаут ламає ball/socket** — `() Interface` вільними вузлами: перетини через полотно, мітки відірвані від провайдерів; `Component -() I` давало дуги через межу; мітковані ребра жертвували нотацією. Виправлено: канонічний рендер з ручним лейаутом (`render_component.py`) — справжні assembly-коннектори, сітка рядів, зовнішні через межу; `.puml`/`.drawio` — текстова модель з тією ж семантикою. Коміт spec+рендер: поточний
 
 Повний список — AUDIT.md (6 розбіжностей + матриця).
 

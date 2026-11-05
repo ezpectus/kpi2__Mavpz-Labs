@@ -45,7 +45,7 @@
 | # | Пункт | Вердикт | Доказ |
 |---|---|---|---|
 | 1 | Компоненти UI/API/сервіси/DAL/БД | PASS | `component.puml`: Frontend, API Gateway, 5 сервісів, DAL, PostgreSQL |
-| 2 | Provided/required-інтерфейси | PASS | IAuth/IVideoOps/ICommentOps/ISearch/INotify/ISearchIndex/IDataAccess/IGoogleOAuth/IEmailGateway — направлені залежності `consumer ..> provider : IName` (ball/socket замінено на мітковані ребра після layout-рев'ю, AUDIT знахідка 6) |
+| 2 | Provided/required-інтерфейси | PASS | усі 10 інтерфейсів як assembly-коннектори на `renders/component.png` (ball=provided / socket=required, легенда на діаграмі); авто-лейаут замінено ручним `render_component.py` — AUDIT знахідка 6 |
 | 3 | Залежності | PASS | усі ребра через інтерфейси або задокументовані |
 | 4 | Чітка межа системи | PASS | `rectangle "VideoHub System"` — first-class елемент; зовнішні поза нею |
 | 5 | Зовнішні інтеграції | PASS | Google OAuth (REQ2/UC9) + Email/SMS Gateway (ADR-005) |
