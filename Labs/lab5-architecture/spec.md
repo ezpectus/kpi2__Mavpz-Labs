@@ -60,6 +60,6 @@
 - [x] Узгодженість з UC (Lab 2)
 - [x] Узгодженість з Sequence (Lab 3)
 - [x] Узгодженість з Activity (Lab 4)
-- [x] Діаграма в UML component-нотації — канонічний візуал `renders/component.png` з ручним лейаутом (`renders/render_component.py`, відтворювано): «component»-стереотипи, provided ball / required socket assembly-коннектори, межа `VideoHub System`, `External Systems` поза нею; текстова модель `model/component.puml` + редагований `model/component.drawio` семантично ті самі (ті ж компоненти/інтерфейси/ребра); авто-лейаут PlantUML на 10 інтерфейсах не давав читабельний ball/socket (дуги через межу, плаваючі мітки) — AUDIT знахідка 6
+- [x] Діаграма в UML component-нотації — канонічний візуал `model/component.drawio` з ручним лейаутом + `renders/component.png`: «component»-стереотипи, provided ball / required socket assembly-коннектори (легенда на діаграмі), межа `VideoHub System`, `External Systems` поза нею; текстова модель `model/component.puml` — ті самі компоненти/інтерфейси/ребра; авто-лейаут PlantUML на 10 інтерфейсах не давав читабельний ball/socket (дуги через межу, плаваючі мітки) — AUDIT знахідка 6
 - [x] Матриця трасування: кожен компонент і кожна залежність має слід у Lab 1–4 (UC/REQ/lifeline/activity-крок) — доведено таблицею в AUDIT.md; жоден UC1–UC9 без компонента
 - [x] Email/SMS Gateway — задокументоване доменне розширення (ADR-005): канал сповіщень для REQ6 і кроку Notify (Lab 4), поза REQ явно позначено

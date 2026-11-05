@@ -2,7 +2,7 @@
 
 ## 1. Намір і критерії
 
-Змоделював архітектуру VideoHub компонентною діаграмою UML: модулі (Frontend, API Gateway, Auth/Video/Comment/Search/Notification Services, Data Access Layer, PostgreSQL), provided/required-інтерфейси як assembly-коннектори (ball на провайдері / socket на споживачі), межа системи, зовнішні інтеграції (Google OAuth, Email/SMS Gateway). Канонічний візуал — `renders/component.png` з ручним лейаутом (`renders/render_component.py`): авто-лейаут на 10 інтерфейсах давав спагетті; `component.puml` + `component.drawio` — текстова модель з тією ж семантикою. Критерії в spec.md + ключовий: кожен компонент і залежність трасується до ланцюга Lab 1–4 (матриця в AUDIT.md).
+Змоделював архітектуру VideoHub компонентною діаграмою UML: модулі (Frontend, API Gateway, Auth/Video/Comment/Search/Notification Services, Data Access Layer, PostgreSQL), provided/required-інтерфейси як assembly-коннектори (ball на провайдері / socket-виріз на споживачі), межа системи, зовнішні інтеграції (Google OAuth, Email/SMS Gateway). Канонічна діаграма — `model/component.drawio` з ручним лейаутом + `renders/component.png`: авто-лейаут на 10 інтерфейсах давав спагетті; `component.puml` — текстова модель з тією ж семантикою. Критерії в spec.md + ключовий: кожен компонент і залежність трасується до ланцюга Lab 1–4 (матриця в AUDIT.md).
 
 Лаба зроблена AI-шляхом з двома моделями: SWE-2 Max (драфт/реалізація) + GLM 5.3 Max (adversarial-рев'ю). Слід: `ai/prompts.md`, `ai/audit.md`, `ai/lab5_workflow.md`.
 
